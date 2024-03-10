@@ -14,7 +14,7 @@ async function run(event) {
 
   try {
     const app = await client("https://reach-vb-qr-code-ai-art-generator.hf.space/");
-    const result = await app.predict(0, [linkedin, dream, tags, 8.5, 1.3, 1, -1, null, null, true, "DPM++ Karras SDE"]);
+    const result = await app.predict(0, [linkedin, dream, tags, 7.5, 1.1, 0.9, -1, null, null, true, "DPM++ Karras SDE"]);
 
     imageData = result?.data;
 
