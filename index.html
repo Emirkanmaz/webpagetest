@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gradio Script Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradio Script Test</title>
 </head>
 <body>
-    <button id="runButton">Run Script</button>
-    <div id="imageContainer"></div>
+  <form id="inputForm">
+    <label for="linkedin">LinkedIn URL:</label>
+    <input type="text" id="linkedin" name="linkedin" required>
+    <br>
 
-    <script type="module" src="./script.js"></script>
+    <label for="dream">Dream:</label>
+    <input type="text" id="dream" name="dream" required>
+    <br>
+
+    <label for="tags">Tags:</label>
+    <input type="text" id="tags" name="tags" required>
+    <br>
+
+    <button type="submit" id="runButton">Run Script</button>
+    <div id="loadingIndicator" style="display: none;">Loading...</div>
+  </form>
+  <div id="imageContainer"></div>
+  <button type="button" id="downloadButton" style="display: none;" onclick="downloadImage(imageData)">Resmi İndir</button>
+
+  <script type="module" src="./script.js"></script>
 </body>
 </html>
