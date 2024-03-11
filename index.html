@@ -7,20 +7,30 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <form id="inputForm">
-    <label for="link">Link:</label>
-    <input type="text" id="link" name="link" required>
-    <br>
+  <div class="container">
+    <form id="inputForm">
+      <h1>Gradio Script Test</h1>
 
-    <label for="prompt">prompt:</label>
-    <input type="text" id="prompt" name="prompt" required>
-    <br>
+      <div class="form-group">
+        <label for="link">Link:</label>
+        <input type="text" id="link" name="link" required>
+      </div>
 
-    <button type="submit" id="runButton">Run Script</button>
-    <div id="loadingIndicator" style="display: none;">Loading...</div>
-  </form>
-  <div id="imageContainer"></div>
-  <button type="button" id="downloadButton" style="display: none;" onclick="downloadImage(imageData)">Resmi İndir</button>
+      <div class="form-group">
+        <label for="prompt">Prompt:</label>
+        <input type="text" id="prompt" name="prompt" required>
+      </div>
+
+      <div class="button-container">
+        <button type="submit" id="runButton">Run Script</button>
+        <div id="loadingIndicator" style="display: none;">Loading...</div>
+      </div>
+    </form>
+
+    <div id="imageContainer"></div>
+
+    <button type="button" id="downloadButton" style="display: none;" onclick="downloadImage(imageData)">Download Image</button>
+  </div>
 
   <script type="module" src="./script.js"></script>
 </body>
