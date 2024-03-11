@@ -20,7 +20,7 @@ async function run(event) {
     if (imageData) {
       displayImage(imageData);
       document.getElementById("downloadButton").remove();
-      createDownloadButton();
+      //createDownloadButton();
     } else {
       console.error("Base64 data not found in the result.");
     }
