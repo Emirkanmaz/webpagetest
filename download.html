@@ -21,7 +21,7 @@ var img = new Image();
                 var ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0);
 
-                var jpegBase64 = canvas.toDataURL('image/jpeg', 0.5); // 0.5, JPEG 
+                var jpegBase64 = canvas.toDataURL('image/jpeg', 0); // 0.5, JPEG 
                 var a = document.createElement("a");
                 a.href = jpegBase64;
                 a.download = "resim.jpg";
