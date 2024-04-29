@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -12,17 +13,18 @@ body {
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
-  padding-top: 20px;
+  padding: 10px;
+}
+
+.content {
+  max-width: 100%; /* İçeriği genişliğe sığacak şekilde ayarla */
+  overflow-x: hidden; /* Yatay taşmayı önle */
+  overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
+  padding: 0; /* Eklemek yerine kaldırıyoruz */
 }
 
 form {
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  background-color: #f4f4f4; /* Açık gri form arka planı */
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hafif gölge */
-  text-align: center;
+  max-width: 100%; /* Formun genişliğini içeriğe sığacak şekilde ayarla */
 }
 
 h1 {
@@ -54,10 +56,13 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px; /* Boşluğu artırıyoruz */
 }
 
 button {
+  margin-bottom: 20px; /* Boşluğu artırıyoruz */
   background-color: #4caf50;
+  width: 100%;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -84,12 +89,14 @@ button:hover {
 }
 
 #imageContainer img {
+  max-width: 100%; 
   width: 100%;
   height: auto;
   transition: transform 0.3s ease;
 }
 
 #downloadButton {
+  width: 100%; 
   background-color: #4caf50;
   color: #fff;
   padding: 10px 20px;
@@ -107,5 +114,11 @@ button:hover {
 @media only screen and (max-width: 600px) {
   form {
     padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .form-group {
+    margin-bottom: 10px; /* Daha küçük boşluklar */
   }
 }
