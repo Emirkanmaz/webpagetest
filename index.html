@@ -8,27 +8,30 @@
 </head>
 <body>
   <div class="container">
-    <form id="inputForm">
-      <h1>Qr Dream</h1>
+    <div class="content">
+      <form id="inputForm">
+        <h1>Qr Dream</h1>
 
-      <div class="form-group">
-        <label for="link">Link:</label>
-        <input type="text" id="link" name="link" required>
+        <div class="form-group">
+          <label for="link">Link:</label>
+          <input type="text" id="link" name="link" required>
+        </div>
+
+        <div class="form-group">
+          <label for="prompt">Prompt:</label>
+          <input type="text" id="prompt" name="prompt" required>
+        </div>
+
+        <div class="button-container">
+          <button type="submit" id="runButton">Dream</button>
+          <div id="loadingIndicator" style="display: none;">Dreaming...</div>
+        </div>
+      </form>
+
+      <div id="imageContainer">
+        <img src="white750x750.png" style="max-width: 100%;">
       </div>
-
-      <div class="form-group">
-        <label for="prompt">Prompt:</label>
-        <input type="text" id="prompt" name="prompt" required>
-      </div>
-
-      <div class="button-container">
-        <button type="submit" id="runButton">Run Script</button>
-        <div id="loadingIndicator" style="display: none;">Loading...</div>
-      </div>
-    </form>
-
-    <div id="imageContainer"></div>
-
+    </div>
   </div>
 
   <script type="module" src="./script.js"></script>
