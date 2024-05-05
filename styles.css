@@ -32,8 +32,16 @@ h1 {
   margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 20px;
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  color: #333;
+  min-height: 150px; /* İstediğiniz boyutu buradan ayarlayabilirsiniz */
+  resize: vertical; /* Yalnızca dikey boyutu değiştirilebilir */
 }
 
 label {
@@ -44,7 +52,6 @@ label {
 input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
   box-sizing: border-box;
   border: 1px solid #555;
   border-radius: 4px;
@@ -56,11 +63,11 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px; /* Boşluğu artırıyoruz */
+  margin-bottom: 3px; /* Boşluğu artırıyoruz */
 }
 
 button {
-  margin-bottom: 20px; /* Boşluğu artırıyoruz */
+  margin-bottom: 10px; /* Boşluğu artırıyoruz */
   background-color: #4caf50;
   width: 100%;
   color: #fff;
