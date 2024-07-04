@@ -3,32 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qr Dream</title>
+  <title>QR Dream</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
    <div class="container">
         <div class="content">
           <form id="inputForm">
-            <h1>Qr Dream</h1>
+            <h1>QR Dream</h1>
+          
             <div class="form-group">
               <label for="link">Link:</label>
-              <input type="text" id="link" name="link" placeholder="Qr Dream" required>
+              <input type="text" id="link" name="link" placeholder="QR Dream" required>
             </div>
+          
             <div class="form-group">
               <label for="prompt">Prompt:</label>
-              <textarea id="prompt" name="prompt" placeholder="Generate a realistic image of a quaint village nestled in a picturesque valley, surrounded by lush green hills. Show charming cottages with thatched roofs, a cobblestone street winding through the village, and a steepled church in the distance. Include villagers going about their daily routines and evoke the idyllic charm of rural life." required></textarea>
-          </div>
+              <textarea id="prompt" name="prompt" placeholder="Generate a realistic image of a quaint village nestled in a picturesque valley, surrounded by lush green hills. Show charming cottages with thatched roofs, a cobblestone street winding through the village, and a steepled church in the distance. Include villagers going about their daily routines and evoke the idyllic charm of rural life." required></textarea> 
+            </div>
+          
+            <details class="advanced-settings">
+              <summary>Advanced Settings</summary>
+              <div class="form-group">
+                <label for="negativePrompt">Negative Prompt:</label>
+                <input type="text" id="negativePrompt" name="negativePrompt" value="ugly, disfigured, low quality, blurry, nsfw">
+              </div>
+              <div class="form-group">
+                <label for="guidanceScale">Guidance Scale:</label>
+                <input type="range" id="guidanceScale" name="guidanceScale" min="0" max="50" step="0.05" value="7.5">
+                <input type="number" id="guidanceScaleInput" value="7.5" min="0" max="50" step="0.05">
+              </div>
+              <div class="form-group">
+                <label for="qrWeightFactor">Controlnet Conditioning Scale:</label>
+                <input type="range" id="qrWeightFactor" name="qrWeightFactor" min="0" max="5" step="0.01" value="1.1">
+                <input type="number" id="qrWeightFactorInput" value="1.1" min="0" max="5" step="0.01">
+              </div>
+              <div class="form-group">
+                <label for="qrPrecision">Strength:</label>
+                <input type="range" id="qrPrecision" name="qrPrecision" min="0" max="1" step="0.01" value="0.9">
+                <input type="number" id="qrPrecisionInput" value="0.9" min="0" max="1" step="0.01">
+              </div>
+              <div class="form-group">
+                <label for="qrSeed">Seed:</label>
+                <input type="range" id="qrSeed" name="qrSeed" min="-1" max="9999999999" step="1" value="-1">
+                <input type="number" id="qrSeedInput" value="-1" min="-1" max="9999999999" step="1">
+              </div>
+            </details>
+          
             <div class="button-container">
               <button type="submit" id="runButton">Dream</button>
-              <div id="loadingIndicator" style="display: none;">Dreaming...</div>
+              <div id="loadingIndicator" style="display: none;">Dreaming</div>
             </div>
-      </form>
-      <div id="imageContainer">
-        <img src="image.png" style="max-width: 100%;">
-      </div>
-    </div>
-  </div>
+          </form>
+          <div id="imageContainer">
+            <img src="image.png" style="max-width: 100%;">
+          </div>
+        </div>
+   </div>
 
   <script type="module" src="./script.js"></script>
 </body>
