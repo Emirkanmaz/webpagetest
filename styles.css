@@ -1,10 +1,18 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2980b9;
+  --background-color: #ecf0f1;
+  --text-color: #2c3e50;
+  --input-background: #fff;
+  --border-color: #bdc3c7;
+}
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #fff; /* Beyaz arka plan */
-  color: #333; /* Siyah metin */
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .container {
@@ -12,120 +20,186 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
-  padding: 10px;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .content {
-  max-width: 100%; /* İçeriği genişliğe sığacak şekilde ayarla */
-  overflow-x: hidden; /* Yatay taşmayı önle */
-  overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
-  padding: 0; /* Eklemek yerine kaldırıyoruz */
-}
-
-form {
-  max-width: 100%; /* Formun genişliğini içeriğe sığacak şekilde ayarla */
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--input-background);
+  border-radius: 8px;
+  padding: 10px 20px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 2em;
+  margin-top: 10px;
   margin-bottom: 20px;
+  text-align: center;
+  color: var(--primary-color);
 }
 
-textarea {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background-color: #f4f4f4;
-  color: #333;
-  min-height: 150px; /* İstediğiniz boyutu buradan ayarlayabilirsiniz */
-  resize: vertical; /* Yalnızca dikey boyutu değiştirilebilir */
+.form-group {
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
-input {
+input[type="text"],
+textarea,
+input[type="number"] {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
-  border: 1px solid #555;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 3px; /* Boşluğu artırıyoruz */
+  margin-top: 20px;
 }
 
 button {
-  margin-bottom: 10px; /* Boşluğu artırıyoruz */
-  background-color: #4caf50;
-  width: 100%;
-  color: #fff;
-  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--secondary-color);
+}
+
+.advanced-settings {
+  margin-top: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.advanced-settings summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.advanced-settings .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.advanced-settings label {
+  flex: 0 0 40%;
+  margin-bottom: 0;
+}
+
+.advanced-settings input[type="range"] {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.advanced-settings input[type="number"] {
+  width: 80px;
 }
 
 #loadingIndicator {
   display: none;
-  margin-top: 10px;
-  color: #888;
+  margin-top: 15px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-align: center;
 }
 
 #imageContainer {
   margin-top: 20px;
   overflow: hidden;
-  border-radius: 12px;
-  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #imageContainer img {
   max-width: 100%; 
   width: 100%;
   height: auto;
-  transition: transform 0.3s ease;
+  display: block;
 }
 
 #downloadButton {
   width: 100%; 
-  background-color: #4caf50;
-  color: #fff;
-  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 1px;
+  margin-top: 15px;
   transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #downloadButton:hover {
-  background-color: #45a049;
+  background-color: var(--secondary-color);
 }
 
 @media only screen and (max-width: 600px) {
-  form {
+  .container {
     padding: 10px;
   }
-}
 
-@media only screen and (max-width: 600px) {
-  .form-group {
-    margin-bottom: 10px; /* Daha küçük boşluklar */
+  .content {
+    padding: 10px 15px 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    margin-top: 5px;
+  }
+
+  .advanced-settings .form-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .advanced-settings label {
+    margin-bottom: 5px;
+  }
+
+  .advanced-settings input[type="range"] {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .advanced-settings input[type="number"] {
+    width: 100%;
+  }
+
+  button, #downloadButton {
+    padding: 10px 20px;
+    font-size: 14px;
   }
 }
