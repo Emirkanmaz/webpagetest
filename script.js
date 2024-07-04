@@ -11,7 +11,7 @@ async function run(event) {
   const negativePrompt = document.getElementById('negativePrompt').value;
   const guidanceScale = parseFloat(document.getElementById('guidanceScale').value);
   const qrWeightFactor = parseFloat(document.getElementById('qrWeightFactor').value);
-  const qrPrecision = parseInt(document.getElementById('qrPrecision').value);
+  const qrPrecision = parseFloat(document.getElementById('qrPrecision').value);
   const qrSeed = parseInt(document.getElementById('qrSeed').value);
   
 
@@ -39,16 +39,17 @@ async function run(event) {
       qrSeed,
       null, null, true, "DPM++ Karras SDE"
     ]);
-    imageData = result?.data;
-
-    if (imageData) {
+    if (result && result.data && result.data[0]) {
+      imageData = result.data[0];
       displayImage(imageData);
       createDownloadButton();
     } else {
-      console.error("Base64 data not found in the result.");
+      console.error("Image data not found in the result.");
+      alert("Failed to generate image. Please try again.");
     }
   } catch (error) {
     console.error("An error occurred:", error);
+    alert("An error occurred while generating the image. Please try again.");
   } finally {
     clearInterval(loadingInterval);
     document.getElementById('runButton').style.display = 'block';
@@ -166,6 +167,7 @@ function initializeSeedInput() {
     }
   });
 }
+
 
 
 document.getElementById('inputForm').addEventListener('submit', run);
