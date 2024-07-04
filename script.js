@@ -1,20 +1,44 @@
 import { client } from "./@gradio/client/dist/index.js";
 
 let imageData;
+let loadingInterval;
 
 async function run(event) {
   event.preventDefault();
 
   const link = document.getElementById('link').value;
   const prompt = document.getElementById('prompt').value;
+  const negativePrompt = document.getElementById('negativePrompt').value;
+  const guidanceScale = parseFloat(document.getElementById('guidanceScale').value);
+  const qrWeightFactor = parseFloat(document.getElementById('qrWeightFactor').value);
+  const qrPrecision = parseInt(document.getElementById('qrPrecision').value);
+  const qrSeed = parseInt(document.getElementById('qrSeed').value);
+  
 
   document.getElementById('runButton').style.display = 'none';
-  document.getElementById('loadingIndicator').style.display = 'block';
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  loadingIndicator.style.display = 'block';
+  
+  
+  let dots = 0;
+  loadingInterval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    loadingIndicator.textContent = 'Dreaming' + '.'.repeat(dots);
+  }, 500);
+
 
   try {
     const app = await client("https://reach-vb-qr-code-ai-art-generator.hf.space/");
-    const result = await app.predict(0, [link, prompt, "ugly, disfigured, low quality, blurry, nsfw", 8.5, 1.3, 1, -1, null, null, true, "DPM++ Karras SDE"]);
-
+    const result = await app.predict(0, [
+      link, 
+      prompt, 
+      negativePrompt, 
+      guidanceScale, 
+      qrWeightFactor, 
+      qrPrecision, 
+      qrSeed,
+      null, null, true, "DPM++ Karras SDE"
+    ]);
     imageData = result?.data;
 
     if (imageData) {
@@ -26,15 +50,16 @@ async function run(event) {
   } catch (error) {
     console.error("An error occurred:", error);
   } finally {
+    clearInterval(loadingInterval);
     document.getElementById('runButton').style.display = 'block';
-    document.getElementById('loadingIndicator').style.display = 'none';
+    loadingIndicator.style.display = 'none';
   }
 }
 
 function displayImage(base64Data) {
   const imgElement = document.createElement("img");
   imgElement.src = `${base64Data}`;
-  imgElement.style.maxWidth = '100%'; // Ensure the image is responsive
+  imgElement.style.maxWidth = '100%';
   document.getElementById("imageContainer").innerHTML = "";
   document.getElementById("imageContainer").appendChild(imgElement);
 }
@@ -43,7 +68,7 @@ function createDownloadButton() {
 
   const existingDownloadButton = document.getElementById("downloadButton");
   if (existingDownloadButton) {
-    existingDownloadButton.parentNode.removeChild(existingDownloadButton); // Mevcut düğmeyi kaldır
+    existingDownloadButton.parentNode.removeChild(existingDownloadButton);
   }
 
   const downloadButton = document.createElement("button");
@@ -68,7 +93,85 @@ function downloadImage() {
   document.body.removeChild(a);
 }
 
+function updateSliderValue(sliderId, valueId) {
+  const slider = document.getElementById(sliderId);
+  const valueSpan = document.getElementById(valueId);
+  valueSpan.textContent = slider.value;
+}
+
+function initializeSliders() {
+  const sliders = [
+    { sliderId: 'guidanceScale', valueId: 'guidanceScaleValue' },
+    { sliderId: 'qrWeightFactor', valueId: 'qrWeightFactorValue' },
+    { sliderId: 'qrPrecision', valueId: 'qrPrecisionValue' },
+    { sliderId: 'qrSeed', valueId: 'qrSeedValue' }
+  ];
+
+  sliders.forEach(({ sliderId, valueId }) => {
+    const slider = document.getElementById(sliderId);
+    slider.addEventListener('input', () => updateSliderValue(sliderId, valueId));
+    updateSliderValue(sliderId, valueId);
+  });
+}
+
+function generateRandomSeed() {
+  return Math.floor(Math.random() * 1000000000);
+}
+
+function initializeInputs() {
+  const inputs = [
+    { sliderId: 'guidanceScale', inputId: 'guidanceScaleInput' },
+    { sliderId: 'qrWeightFactor', inputId: 'qrWeightFactorInput' },
+    { sliderId: 'qrPrecision', inputId: 'qrPrecisionInput' },
+    { sliderId: 'qrSeed', inputId: 'qrSeedInput' }
+  ];
+
+  inputs.forEach(({ sliderId, inputId }) => {
+    const slider = document.getElementById(sliderId);
+    const input = document.getElementById(inputId);
+
+    if (sliderId === 'qrSeed' && slider.value === '-1') {
+      const randomSeed = generateRandomSeed();
+      slider.value = randomSeed;
+      input.value = randomSeed;
+    }
+
+    slider.addEventListener('input', () => {
+      input.value = slider.value;
+    });
+
+    input.addEventListener('input', () => {
+      slider.value = input.value;
+    });
+  });
+}
+
+function initializeSeedInput() {
+  const seedSlider = document.getElementById('qrSeed');
+  const seedInput = document.getElementById('qrSeedInput');
+
+  seedSlider.addEventListener('change', () => {
+    if (seedSlider.value === '-1') {
+      const randomSeed = generateRandomSeed();
+      seedSlider.value = randomSeed;
+      seedInput.value = randomSeed;
+    }
+  });
+
+  seedInput.addEventListener('change', () => {
+    if (seedInput.value === '-1') {
+      const randomSeed = generateRandomSeed();
+      seedSlider.value = randomSeed;
+      seedInput.value = randomSeed;
+    }
+  });
+}
+
+
 document.getElementById('inputForm').addEventListener('submit', run);
-
-
-
+document.addEventListener('DOMContentLoaded', initializeSliders);
+document.addEventListener('DOMContentLoaded', initializeInputs);
+document.addEventListener('DOMContentLoaded', () => {
+  initializeInputs();
+  initializeSeedInput();
+})
