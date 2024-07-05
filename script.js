@@ -2,6 +2,9 @@ import { client } from "./@gradio/client/dist/index.js";
 
 let imageData;
 let loadingInterval;
+let loadingTimeout;
+let intervalCleared = false;
+
 
 async function run(event) {
   event.preventDefault();
@@ -52,13 +55,20 @@ async function run(event) {
     console.error("An error occurred:", error);
     alert("An error occurred while generating the image. Please try again.");
   } finally {
-    clearInterval(loadingInterval);
+    if (!intervalCleared) {
+      clearInterval(loadingInterval);
+    }
+    clearTimeout(loadingTimeout);
     document.getElementById('runButton').style.display = 'block';
     loadingIndicator.style.display = 'none';
   }
 }
 
 function showLoadingWarning() {
+  if (!intervalCleared) {
+    clearInterval(loadingInterval);
+    intervalCleared = true;
+  }
   const loadingIndicator = document.getElementById('loadingIndicator');
   loadingIndicator.textContent = "Takes more than 30 seconds? This is because the server is sleeping. Try again in 5 minutes or wait.";
 }
