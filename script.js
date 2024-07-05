@@ -26,6 +26,7 @@ async function run(event) {
     loadingIndicator.textContent = 'Dreaming' + '.'.repeat(dots);
   }, 500);
 
+  loadingTimeout = setTimeout(showLoadingWarning, 30000);
 
   try {
     const app = await client("https://reach-vb-qr-code-ai-art-generator.hf.space/");
@@ -55,6 +56,11 @@ async function run(event) {
     document.getElementById('runButton').style.display = 'block';
     loadingIndicator.style.display = 'none';
   }
+}
+
+function showLoadingWarning() {
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  loadingIndicator.textContent = "Takes more than 30 seconds? This is because the server is sleeping. Try again in 5 minutes or wait.";
 }
 
 function displayImage(base64Data) {
