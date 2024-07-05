@@ -77,10 +77,12 @@ function createDownloadButton() {
   downloadButton.id = "downloadButton";
   downloadButton.textContent = "Download Image";
   downloadButton.onclick = downloadImage;
-  downloadButton.style.display = 'block';
-  downloadButton.style.margin = '0 auto';
 
-  document.getElementById("inputForm").appendChild(downloadButton);
+  const buttonContainer = document.createElement("div");
+  buttonContainer.className = "button-container";
+  buttonContainer.appendChild(downloadButton);
+
+  document.getElementById("inputForm").appendChild(buttonContainer);
 }
 
 
