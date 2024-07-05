@@ -70,7 +70,7 @@ function showLoadingWarning() {
     intervalCleared = true;
   }
   const loadingIndicator = document.getElementById('loadingIndicator');
-  loadingIndicator.textContent = "Takes more than 30 seconds? This is because the server is sleeping. Try again in 5 minutes or wait.";
+  loadingIndicator.textContent = "Takes more than 30 seconds? This is because the server is sleeping. Try again in 5 minutes or wait. Working on it :)";
 }
 
 function displayImage(base64Data) {
